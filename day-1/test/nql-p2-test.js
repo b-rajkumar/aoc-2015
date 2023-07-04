@@ -1,6 +1,6 @@
 const { describe, it } = require('node:test');
 const { deepStrictEqual } = require('assert');
-const { getStarPosOfBasement } = require('../src/npl-p2');
+const { getStarPosOfBasement } = require('../src/nql-p2');
 
 describe('getStartPosOfBasement', () => {
   it('should return 1', () => {

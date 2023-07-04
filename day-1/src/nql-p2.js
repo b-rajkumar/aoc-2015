@@ -6,13 +6,11 @@ const getStarPosOfBasement = (instructions) => {
     ')': -1
   };
 
-  instructions.split('').some((instruction) => {
-    currentFloor += movements[instruction]
+  for(const instruction in instructions) {
+    currentFloor += movements[instructions[instruction]];
     position += 1;
-    return currentFloor === -1
-  });
-
-  return position;
+    if(currentFloor === -1) return position;
+  };
 };
 
 exports.getStarPosOfBasement = getStarPosOfBasement;
