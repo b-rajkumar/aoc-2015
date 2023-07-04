@@ -3,15 +3,15 @@ const splitByX = (text) => text.split('x');
 const sum = (numbers) => numbers.reduce((a, b) => a + b, 0);
 const ascendingSort = (numbers) => numbers.sort((a, b) => a - b);
 
-const getSmallestSideOfPrism = (dimensions) => {
+const getSmallestSideArea = (dimensions) => {
   const [l, b] = ascendingSort(dimensions);
 
   return l * b;
 };
 
-const getAreaOfPaperForPrism = (l, w, h) => {
+const getAreaOfPaperForPrism = ([l, w, h]) => {
   let areaOfPaper = 2 * l * w + 2 * w * h + 2 * h * l;
-  areaOfPaper += getSmallestSideOfPrism([l, w, h]);
+  areaOfPaper += getSmallestSideArea([l, w, h]);
 
   return areaOfPaper;
 };
@@ -23,11 +23,31 @@ const getPrisms = (data) => {
 const getTotalAreaOfPaper = (data) => {
   const prisms = getPrisms(data);
 
-  const areaOfPaper = sum(prisms.map(([l, w, h]) => getAreaOfPaperForPrism(l, w, h)));
+  return sum(prisms.map((dimensions) => getAreaOfPaperForPrism(dimensions)));
+};
 
-  return areaOfPaper;
+const getSmallestSidePerimeter = (dimensions) => {
+  const [l, b] = ascendingSort(dimensions);
+
+  return 2 * l + 2 * b;
+};
+
+const getRibbonLengthOfPrism = ([l, w, h]) => {
+  let ribbonLength = l * w * h;
+  const smallestSidePerimeter = getSmallestSidePerimeter([l, w, h]);
+
+  return ribbonLength + smallestSidePerimeter;
+};
+
+const getTotalRibbonLength = (data) => {
+  const prisms = getPrisms(data);
+
+  return sum(prisms.map((dimensions) => getRibbonLengthOfPrism(dimensions)));
 };
 
 exports.getAreaOfPaperForPrism = getAreaOfPaperForPrism;
-exports.getSmallestSideOfPrism = getSmallestSideOfPrism;
+exports.getSmallestSideArea = getSmallestSideArea;
 exports.getTotalAreaOfPaper = getTotalAreaOfPaper;
+exports.getRibbonLengthOfPrism = getRibbonLengthOfPrism;
+exports.getSmallestSidePerimeter = getSmallestSidePerimeter;
+exports.getTotalRibbonLength = getTotalRibbonLength;
