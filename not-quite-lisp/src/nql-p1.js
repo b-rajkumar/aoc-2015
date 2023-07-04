@@ -7,6 +7,6 @@ const getFloorNumber = (instructions) => {
   instructions.split('').forEach(instruction => currentFloor += movements[instruction]);
 
   return currentFloor;
-}
+};
 
 exports.getFloorNumber = getFloorNumber;
