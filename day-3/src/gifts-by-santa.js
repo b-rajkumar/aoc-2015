@@ -1,21 +1,22 @@
-const getVisitedHousesCount = (movesData) => {
+const getVisitedHousesCount = (instructions) => {
   const santaLocation = [0, 0];
-  const visitedHouses = { '00': '00' };
+  const visitedHouses = new Set();
+  visitedHouses.add(santaLocation.toString());
 
-  const moveInstructions = {
+  const instructionsToMove = {
     'v': () => santaLocation[1] -= 1,
     '^': () => santaLocation[1] += 1,
     '<': () => santaLocation[0] -= 1,
     '>': () => santaLocation[0] += 1,
   };
 
-  for(const move of movesData) {
-    moveInstructions[move]();
-    const location = santaLocation.join('');
-    visitedHouses[location] = location;
+  for(const instruction of instructions) {
+    instructionsToMove[instruction]();
+
+    visitedHouses.add(santaLocation.toString());
   };
 
-  return Object.keys(visitedHouses).length;
+  return visitedHouses.size;
 };
 
 exports.getVisitedHousesCount = getVisitedHousesCount;  
