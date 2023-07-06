@@ -15,13 +15,11 @@ const hasBadStrings = (text, badStrings) => {
 };
 
 const isNiceString = (string) => {
-  const conditions = {
-    containsMoreThanThreeVowels: calculateVowelCount(string) > 2,
-    containsConsecutiveSameLetters: hasConsecutiveSameLetters(string),
-    containsbadStrings: !hasBadStrings(string, ['ab', 'cd', 'pq', 'xy'])
-  };
+  const containsMoreThanThreeVowels = calculateVowelCount(string) > 2;
+  const containsConsecutiveSameLetters = hasConsecutiveSameLetters(string);
+  const containsbadStrings = hasBadStrings(string, ['ab', 'cd', 'pq', 'xy']);
 
-  return Object.values(conditions).every(condition => condition);
+  return containsMoreThanThreeVowels && containsConsecutiveSameLetters && !containsbadStrings;
 };
 
 const getNiceStringsCountP1 = (strings) => {

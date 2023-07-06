@@ -21,7 +21,32 @@ describe('getNiceStringsCount', () => {
 });
 
 describe('isNiceString', () => {
-  it('should return true for a nice string', () => {
+  it('should return false if the string does not have at least 3 vowels', () => {
+    const data = 'raja';
+    const expected = false;
+    const actual = isNiceString(data);
+
+    strictEqual(actual, expected);
+  });
+
+  it('should return false if the string does not contain a repeating letter consecutively', () => {
+    const data = 'something';
+    const expected = false;
+    const actual = isNiceString(data);
+
+    strictEqual(actual, expected);
+  });
+
+  it('should return false if the string contains any one of the listed bad strings', () => {
+    const data = 'abbacuse';
+    const badStrings = ['ab', 'cd'];
+    const expected = false;
+    const actual = isNiceString(data);
+
+    strictEqual(actual, expected);
+  });
+
+  it('should return true for a string which satisfies all the conditions', () => {
     const data = 'ugknbfddgicrmopn';
     const expected = true;
     const actual = isNiceString(data);
@@ -29,13 +54,6 @@ describe('isNiceString', () => {
     strictEqual(actual, expected);
   });
 
-  it('should return false for a nice string', () => {
-    const data = 'haegwjzuvuyypxyu';
-    const expected = false;
-    const actual = isNiceString(data);
-
-    strictEqual(actual, expected);
-  });
 });
 
 describe('calculateVowelCount', () => {
@@ -77,7 +95,7 @@ describe('hasConsecutiveSameLetters', () => {
 });
 
 describe('hasBadStrings', () => {
-  it('should return true as there are no bad strings present in the text', () => {
+  it('should return false as there are no bad strings present in the text', () => {
     const text = 'bye';
     const badStrings = ['ab', 'cd'];
     const expected = false;
@@ -86,7 +104,7 @@ describe('hasBadStrings', () => {
     strictEqual(actual, expected);
   });
 
-  it('should return true as there are no bad strings present in the text', () => {
+  it('should return true as there are bad strings present in the text', () => {
     const text = 'sometext';
     const badStrings = ['cd', 'te', 'xt'];
     const expected = true;

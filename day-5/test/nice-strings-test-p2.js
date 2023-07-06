@@ -21,17 +21,25 @@ describe('getNiceStringsCount', () => {
 });
 
 describe('isNiceString', () => {
-  it('should return true for a nice string', () => {
-    const data = 'xxyxx';
-    const expected = true;
+  it('should return false if the string does not contain a letter sandwiched between another letter', () => {
+    const data = 'something';
+    const expected = false;
     const actual = isNiceString(data);
 
     strictEqual(actual, expected);
   });
 
-  it('should return false for a nice string', () => {
-    const data = 'hau';
+  it('should return false if the string does not contain a pair that appear twice', () => {
+    const data = 'something';
     const expected = false;
+    const actual = isNiceString(data);
+
+    strictEqual(actual, expected);
+  });
+
+  it('should return true for a string which satisfies all the conditions', () => {
+    const data = 'qjhvhtzxzqqjkmpb';
+    const expected = true;
     const actual = isNiceString(data);
 
     strictEqual(actual, expected);
