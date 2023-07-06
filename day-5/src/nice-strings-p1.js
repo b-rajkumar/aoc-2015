@@ -24,8 +24,8 @@ const isNiceString = (string) => {
   return Object.values(conditions).every(condition => condition);
 };
 
-const getNiceStringsCount = (strings) => {
+const getNiceStringsCountP1 = (strings) => {
   return strings.filter(isNiceString).length;
 };
 
-module.exports = { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings };
+module.exports = { getNiceStringsCountP1, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings };

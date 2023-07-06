@@ -1,28 +1,20 @@
 const { describe, it } = require('node:test');
 const { strictEqual } = require('assert');
-const { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings } = require('../src/nice-strings-p1');
+const { getNiceStringsCountP1, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings } = require('../src/nice-strings-p1');
 
 describe('getNiceStringsCount', () => {
-  it('should return 0 for an empty string', () => {
+  it('should return 0 if there are no nice strings', () => {
     const data = '';
     const expected = 0;
-    const actual = getNiceStringsCount(data.split('\n'));
+    const actual = getNiceStringsCountP1(data.split('\n'));
 
     strictEqual(actual, expected);
   });
 
-  it('should give 1 for a nice string', () => {
-    const data = 'ugknbfddgicrmopn';
-    const expected = 1;
-    const actual = getNiceStringsCount(data.split('\n'));
-
-    strictEqual(actual, expected);
-  });
-
-  it('should give the number of nice strings', () => {
+  it('should give the number of nice strings present in the given strings', () => {
     const data = 'ugknbfddgicrmopn\naaa\nb';
     const expected = 2;
-    const actual = getNiceStringsCount(data.split('\n'));
+    const actual = getNiceStringsCountP1(data.split('\n'));
 
     strictEqual(actual, expected);
   });
