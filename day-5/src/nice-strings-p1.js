@@ -5,25 +5,33 @@ const calculateVowelCount = (text) => {
 };
 
 const hasConsecutiveSameLetters = (text) => {
-  const consecutiveLetters = /(.)\1/;
+  const consecutiveSameLetters = /(.)\1/;
 
-  return consecutiveLetters.test(text);
+  return consecutiveSameLetters.test(text);
 };
 
-const hasBadStrings = (text, badStrings) => {
+const hasBadSubString = (text, badStrings) => {
   return badStrings.some(badString => text.includes(badString));
 };
 
-const isNiceString = (string) => {
-  const containsMoreThanThreeVowels = calculateVowelCount(string) > 2;
-  const containsConsecutiveSameLetters = hasConsecutiveSameLetters(string);
-  const containsbadStrings = hasBadStrings(string, ['ab', 'cd', 'pq', 'xy']);
+const badStrings = ['ab', 'cd', 'pq', 'xy'];
 
-  return containsMoreThanThreeVowels && containsConsecutiveSameLetters && !containsbadStrings;
+const isNiceString = (string) => {
+  const containsMoreThanTwoVowels = calculateVowelCount(string) > 2;
+  const containsConsecutiveSameLetters = hasConsecutiveSameLetters(string);
+  const containsBadSubString = hasBadSubString(string, badStrings);
+
+  return containsMoreThanTwoVowels && containsConsecutiveSameLetters && !containsBadSubString;
 };
 
 const getNiceStringsCount = (strings) => {
   return strings.filter(isNiceString).length;
 };
 
-module.exports = { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings };
+module.exports = {
+  getNiceStringsCount,
+  isNiceString,
+  calculateVowelCount,
+  hasConsecutiveSameLetters,
+  hasBadSubString
+};

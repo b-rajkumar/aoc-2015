@@ -4,10 +4,10 @@ const isPatternPresent = (string, pattern) => {
 
 const isNiceString = (string) => {
   const repeatedPairOfLettersPattern = /(.)(.).*\1\2/;
-  const sandwichPattern = /(.).\1/;
+  const sandwichedLetterPattern = /(.).\1/;
 
   const containsRepeatedPairOfLetters = isPatternPresent(string, repeatedPairOfLettersPattern);
-  const containsSandWichedLetter = isPatternPresent(string, sandwichPattern);
+  const containsSandWichedLetter = isPatternPresent(string, sandwichedLetterPattern);
 
   return containsRepeatedPairOfLetters && containsSandWichedLetter;
 };
@@ -16,4 +16,8 @@ const getNiceStringsCount = (strings) => {
   return strings.filter(isNiceString).length;
 };
 
-module.exports = { getNiceStringsCount, isNiceString, isPatternPresent };
+module.exports = {
+  getNiceStringsCount,
+  isNiceString,
+  isPatternPresent
+};

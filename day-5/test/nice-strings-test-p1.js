@@ -1,6 +1,6 @@
 const { describe, it } = require('node:test');
 const { strictEqual } = require('assert');
-const { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings } = require('../src/nice-strings-p1');
+const { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadSubString } = require('../src/nice-strings-p1');
 
 describe('getNiceStringsCount', () => {
   it('should return 0 if there are no nice strings', () => {
@@ -39,7 +39,6 @@ describe('isNiceString', () => {
 
   it('should return false if the string contains any one of the listed bad strings', () => {
     const data = 'abbacuse';
-    const badStrings = ['ab', 'cd'];
     const expected = false;
     const actual = isNiceString(data);
 
@@ -53,7 +52,6 @@ describe('isNiceString', () => {
 
     strictEqual(actual, expected);
   });
-
 });
 
 describe('calculateVowelCount', () => {
@@ -72,18 +70,16 @@ describe('calculateVowelCount', () => {
 
     strictEqual(actual, expected);
   });
-
 });
 
 describe('hasConsecutiveSameLetters', () => {
   it('should return false if there are no consecutive same letters in the text', () => {
-    const text = 'bye';
+    const text = 'byeb';
     const expected = false;
     const actual = hasConsecutiveSameLetters(text);
 
     strictEqual(actual, expected);
   });
-
 
   it('should return true if there are consecutive same letters in the text', () => {
     const text = 'hello';
@@ -94,22 +90,35 @@ describe('hasConsecutiveSameLetters', () => {
   });
 });
 
-describe('hasBadStrings', () => {
+describe('hasBadSubString', () => {
+  const badStrings = ['ab', 'cd', 'pq', 'xy'];
+
   it('should return false as there are no bad strings present in the text', () => {
-    const text = 'bye';
-    const badStrings = ['ab', 'cd'];
+    const text = 'byea';
     const expected = false;
-    const actual = hasBadStrings(text, badStrings);
+    const actual = hasBadSubString(text, badStrings);
 
     strictEqual(actual, expected);
   });
 
   it('should return true as there are bad strings present in the text', () => {
-    const text = 'sometext';
-    const badStrings = ['cd', 'te', 'xt'];
     const expected = true;
-    const actual = hasBadStrings(text, badStrings);
 
+    let text = 'abacuss';
+    let actual = hasBadSubString(text, badStrings);
     strictEqual(actual, expected);
+
+    text = 'cdbac';
+    actual = hasBadSubString(text, badStrings);
+    strictEqual(actual, expected);
+
+    text = 'fbgpqcture';
+    actual = hasBadSubString(text, badStrings);
+    strictEqual(actual, expected);
+
+    text = 'haxyafd';
+    actual = hasBadSubString(text, badStrings);
+    strictEqual(actual, expected);
+
   });
 });
