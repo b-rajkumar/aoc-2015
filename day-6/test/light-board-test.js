@@ -38,13 +38,13 @@ describe('LightBoard', () => {
     });
 
     it('should lit up the lights in the given range', () => {
-      const instruction = {
+      const instruction = [{
         name: 'on',
         rowStart: 0,
         rowEnd: 1,
         columnStart: 0,
         columnEnd: 1
-      };
+      }];
       lightBoard.execute(instruction);
 
       const expected = [
@@ -58,23 +58,23 @@ describe('LightBoard', () => {
     });
 
     it('should unlit the lights in the given range', () => {
-      let instruction = {
-        name: 'on',
-        rowStart: 0,
-        rowEnd: 1,
-        columnStart: 1,
-        columnEnd: 2
-      };
-      lightBoard.execute(instruction);
-
-      instruction = {
-        name: 'off',
-        rowStart: 1,
-        rowEnd: 1,
-        columnStart: 1,
-        columnEnd: 2
-      };
-      lightBoard.execute(instruction);
+      const instructions = [
+        {
+          name: 'on',
+          rowStart: 0,
+          rowEnd: 1,
+          columnStart: 1,
+          columnEnd: 2
+        },
+        {
+          name: 'off',
+          rowStart: 1,
+          rowEnd: 1,
+          columnStart: 1,
+          columnEnd: 2
+        }
+      ];
+      lightBoard.execute(instructions);
 
       const expected = [
         [false, true, true],
@@ -87,24 +87,24 @@ describe('LightBoard', () => {
     });
 
     it('should toggle the state of lights from lit to unlit and unlit to lit in the given range', () => {
-      let instruction = {
-        name: 'on',
-        rowStart: 0,
-        rowEnd: 0,
-        columnStart: 1,
-        columnEnd: 2
-      };
-      lightBoard.execute(instruction);
+      const instructions = [
+        {
+          name: 'on',
+          rowStart: 0,
+          rowEnd: 0,
+          columnStart: 1,
+          columnEnd: 2
+        },
+        {
+          name: 'toggle',
+          rowStart: 0,
+          rowEnd: 2,
+          columnStart: 1,
+          columnEnd: 1
+        }
+      ];
 
-      instruction = {
-        name: 'toggle',
-        rowStart: 0,
-        rowEnd: 2,
-        columnStart: 1,
-        columnEnd: 1
-      };
-      lightBoard.execute(instruction);
-
+      lightBoard.execute(instructions);
       const expected = [
         [false, false, true],
         [false, true, false],
@@ -135,13 +135,13 @@ describe('LightBoard', () => {
     });
 
     it('should return the count of lights that are in lit state', () => {
-      let instruction = {
+      const instruction = [{
         name: 'on',
         rowStart: 0,
         rowEnd: 1,
         columnStart: 1,
         columnEnd: 2
-      };
+      }];
 
       lightBoard.execute(instruction);
 

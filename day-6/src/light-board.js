@@ -4,23 +4,24 @@ class LightBoard {
     this.#lights = lights;
   }
 
-  execute(instruction) {
-    const { name, columnStart, columnEnd, rowEnd, rowStart } = instruction;
-    const instructionManual = {
-      "on": (light) => light.lit(),
-      "off": (light) => light.unlit(),
-      "toggle": (light) => light.toggle(),
-    };
+  execute(instructions) {
+    instructions.forEach(instruction => {
+      const { name, columnStart, columnEnd, rowEnd, rowStart } = instruction;
+      const instructionManual = {
+        "on": (light) => light.lit(),
+        "off": (light) => light.unlit(),
+        "toggle": (light) => light.toggle(),
+      };
 
-    const instructionToExecute = instructionManual[name] || function() { };
+      const instructionToExecute = instructionManual[name] || function() { };
 
-    for(let row = rowStart; row <= rowEnd; row++) {
-      for(let column = columnStart; column <= columnEnd; column++) {
-        const light = this.#lights[row][column];
-
-        instructionToExecute(light);
+      for(let row = rowStart; row <= rowEnd; row++) {
+        for(let column = columnStart; column <= columnEnd; column++) {
+          const light = this.#lights[row][column];
+          instructionToExecute(light);
+        }
       }
-    }
+    });
   }
 
   litStatusOfLights() {
