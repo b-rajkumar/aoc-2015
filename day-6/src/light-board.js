@@ -31,6 +31,10 @@ class LightBoard {
   litLightsCount() {
     return this.#lights.flat().filter(light => light.isLit()).length;
   }
+
+  totalBrightnessOfLights() {
+    return this.#lights.flat().reduce((brightnessSum, light) => brightnessSum + light.getBrightness(), 0);
+  }
 };
 
 module.exports = { LightBoard };

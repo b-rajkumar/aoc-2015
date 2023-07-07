@@ -151,4 +151,43 @@ describe('LightBoard', () => {
       strictEqual(actual, expected);
     });
   });
+
+  describe('totalBrightnessOfLights', () => {
+    it('should return the total brightness of the lights', () => {
+      const lightBoard = new LightBoard([
+        [new Light(), new Light(), new Light()],
+        [new Light(), new Light(), new Light()],
+        [new Light(), new Light(), new Light()],
+      ]);
+
+      const instruction = [{
+        name: 'on',
+        rowStart: 0,
+        rowEnd: 1,
+        columnStart: 0,
+        columnEnd: 1
+      },
+      {
+        name: 'toggle',
+        rowStart: 0,
+        rowEnd: 1,
+        columnStart: 0,
+        columnEnd: 0
+      },
+      {
+        name: 'off',
+        rowStart: 0,
+        rowEnd: 0,
+        columnStart: 0,
+        columnEnd: 0
+      }
+      ];
+      lightBoard.execute(instruction);
+
+      const expected = 7;
+      const actual = lightBoard.totalBrightnessOfLights();
+
+      deepStrictEqual(actual, expected);
+    });
+  })
 });

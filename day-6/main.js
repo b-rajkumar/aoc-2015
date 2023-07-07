@@ -24,6 +24,7 @@ const main = () => {
   lightBoard.execute(instructions);
 
   console.log('The number of lit lights are', lightBoard.litLightsCount());
+  console.log('The total brightness of lights is', lightBoard.totalBrightnessOfLights());
 };
 
 main();
