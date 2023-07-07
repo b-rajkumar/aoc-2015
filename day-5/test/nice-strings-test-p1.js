@@ -1,12 +1,12 @@
 const { describe, it } = require('node:test');
 const { strictEqual } = require('assert');
-const { getNiceStringsCountP1, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings } = require('../src/nice-strings-p1');
+const { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings } = require('../src/nice-strings-p1');
 
 describe('getNiceStringsCount', () => {
   it('should return 0 if there are no nice strings', () => {
-    const data = '';
+    const data = 'adsff';
     const expected = 0;
-    const actual = getNiceStringsCountP1(data.split('\n'));
+    const actual = getNiceStringsCount(data.split('\n'));
 
     strictEqual(actual, expected);
   });
@@ -14,7 +14,7 @@ describe('getNiceStringsCount', () => {
   it('should give the number of nice strings present in the given strings', () => {
     const data = 'ugknbfddgicrmopn\naaa\nb';
     const expected = 2;
-    const actual = getNiceStringsCountP1(data.split('\n'));
+    const actual = getNiceStringsCount(data.split('\n'));
 
     strictEqual(actual, expected);
   });
@@ -76,7 +76,7 @@ describe('calculateVowelCount', () => {
 });
 
 describe('hasConsecutiveSameLetters', () => {
-  it('should return false if there are no consecutive letters in the text', () => {
+  it('should return false if there are no consecutive same letters in the text', () => {
     const text = 'bye';
     const expected = false;
     const actual = hasConsecutiveSameLetters(text);
@@ -85,7 +85,7 @@ describe('hasConsecutiveSameLetters', () => {
   });
 
 
-  it('should return true if there are consecutive letters in the text', () => {
+  it('should return true if there are consecutive same letters in the text', () => {
     const text = 'hello';
     const expected = true;
     const actual = hasConsecutiveSameLetters(text);

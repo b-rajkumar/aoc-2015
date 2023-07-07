@@ -1,26 +1,19 @@
-const hasSandWichedLetter = (text) => {
-  const sandwichPattern = /(.).\1/;
-
-  return sandwichPattern.test(text);
-};
-
-const hasRepeatedPairOfLetters = (text) => {
-  const repeatedPairOfLettersPattern = /(.)(.).*\1\2/;
-
-  return repeatedPairOfLettersPattern.test(text);
+const isPatternPresent = (string, pattern) => {
+  return pattern.test(string);
 };
 
 const isNiceString = (string) => {
-  const conditions = {
-    containsRepeatedPairOfLetters: hasRepeatedPairOfLetters(string),
-    containsSandWichedLetter: hasSandWichedLetter(string)
-  };
+  const repeatedPairOfLettersPattern = /(.)(.).*\1\2/;
+  const sandwichPattern = /(.).\1/;
 
-  return Object.values(conditions).every(condition => condition);
+  const containsRepeatedPairOfLetters = isPatternPresent(string, repeatedPairOfLettersPattern);
+  const containsSandWichedLetter = isPatternPresent(string, sandwichPattern);
+
+  return containsRepeatedPairOfLetters && containsSandWichedLetter;
 };
 
-const getNiceStringsCountP2 = (strings) => {
+const getNiceStringsCount = (strings) => {
   return strings.filter(isNiceString).length;
 };
 
-module.exports = { getNiceStringsCountP2, isNiceString, hasSandWichedLetter, hasRepeatedPairOfLetters };
+module.exports = { getNiceStringsCount, isNiceString, isPatternPresent };

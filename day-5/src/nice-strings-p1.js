@@ -22,8 +22,8 @@ const isNiceString = (string) => {
   return containsMoreThanThreeVowels && containsConsecutiveSameLetters && !containsbadStrings;
 };
 
-const getNiceStringsCountP1 = (strings) => {
+const getNiceStringsCount = (strings) => {
   return strings.filter(isNiceString).length;
 };
 
-module.exports = { getNiceStringsCountP1, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings };
+module.exports = { getNiceStringsCount, isNiceString, calculateVowelCount, hasConsecutiveSameLetters, hasBadStrings };
