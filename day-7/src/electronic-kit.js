@@ -46,22 +46,36 @@ class ElectronicCircuit {
 
   execute(instruction) {
     const gates = {
-      'assign': (instruction) => this.#assign(instruction),
-      'and': (instruction) => this.#and(instruction),
-      'or': (instruction) => this.#or(instruction),
-      'not': (instruction) => this.#not(instruction),
-      'lshift': (instruction) => this.#lshift(instruction),
-      'rshift': (instruction) => this.#rshift(instruction),
+      'ASSIGN': (instruction) => this.#assign(instruction),
+      'AND': (instruction) => this.#and(instruction),
+      'OR': (instruction) => this.#or(instruction),
+      'NOT': (instruction) => this.#not(instruction),
+      'LSHIFT': (instruction) => this.#lshift(instruction),
+      'RSHIFT': (instruction) => this.#rshift(instruction),
     };
 
     const operation = gates[instruction.operation];
-    const IO = this.#extractIO(instruction);
-    operation(IO);
+    const { input, wire } = this.#extractIO(instruction);
+
+    if(input.includes(undefined)) return false;
+    operation({ input, wire });
+
+    return true;
   }
 
   getWires() {
-    return this.#wires;
+    return { ...this.#wires };
   }
 };
 
-module.exports = { ElectronicCircuit };
+
+const makeCircuit = (components, circuit) => {
+  if(components.length === 0) return true;
+
+  const remainingComponents = components.filter(component => !circuit.execute(component));
+
+  if(remainingComponents.length === components.length) return false;
+  else return makeCircuit(remainingComponents, circuit);
+};
+
+module.exports = { ElectronicCircuit, makeCircuit };
