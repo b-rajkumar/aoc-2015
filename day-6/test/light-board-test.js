@@ -8,10 +8,9 @@ describe('LightBoard', () => {
     it('should return the lit status of a light', () => {
       const light = new Light();
       const lightBoard = new LightBoard([[light]]);
-      const expected = [[false]];
-      const actual = lightBoard.litStatusOfLights();
+      const lightsLitStatus = lightBoard.litStatusOfLights();
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(lightsLitStatus, [[false]]);
     });
 
     it('should return the lit status of the lights', () => {
@@ -19,10 +18,9 @@ describe('LightBoard', () => {
       const secondLight = new Light();
       firstLight.lit();
       const lightBoard = new LightBoard([[firstLight, secondLight]]);
-      const expected = [[true, false]];
-      const actual = lightBoard.litStatusOfLights();
+      const lightsLitStatus = lightBoard.litStatusOfLights();
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(lightsLitStatus, [[true, false]]);
     });
   });
 
@@ -47,14 +45,14 @@ describe('LightBoard', () => {
       }];
       lightBoard.execute(instruction);
 
-      const expected = [
+      const expectedLightStatus = [
         [true, true, false],
         [true, true, false],
         [false, false, false],
       ];
-      const actual = lightBoard.litStatusOfLights();
+      const lightsLitStatus = lightBoard.litStatusOfLights();
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(lightsLitStatus, expectedLightStatus);
     });
 
     it('should unlit the lights in the given range', () => {
@@ -76,14 +74,14 @@ describe('LightBoard', () => {
       ];
       lightBoard.execute(instructions);
 
-      const expected = [
+      const expectedLightStatus = [
         [false, true, true],
         [false, false, false],
         [false, false, false]
       ];
-      const actual = lightBoard.litStatusOfLights();
+      const lightsLitStatus = lightBoard.litStatusOfLights();
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(lightsLitStatus, expectedLightStatus);
     });
 
     it('should toggle the state of lights from lit to unlit and unlit to lit in the given range', () => {
@@ -128,10 +126,9 @@ describe('LightBoard', () => {
     });
 
     it('should return 0 if all lights are in off state', () => {
-      const expected = 0;
-      const actual = lightBoard.litLightsCount();
+      const countOfLitLights = lightBoard.litLightsCount();
 
-      strictEqual(actual, expected);
+      strictEqual(countOfLitLights, 0);
     });
 
     it('should return the count of lights that are in lit state', () => {
@@ -145,10 +142,9 @@ describe('LightBoard', () => {
 
       lightBoard.execute(instruction);
 
-      const expected = 4;
-      const actual = lightBoard.litLightsCount();
+      const countOfLitLights = lightBoard.litLightsCount();
 
-      strictEqual(actual, expected);
+      strictEqual(countOfLitLights, 4);
     });
   });
 
@@ -184,10 +180,9 @@ describe('LightBoard', () => {
       ];
       lightBoard.execute(instruction);
 
-      const expected = 7;
-      const actual = lightBoard.totalBrightnessOfLights();
+      const totalBrightnessOfLights = lightBoard.totalBrightnessOfLights();
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(totalBrightnessOfLights, 7);
     });
   })
 });

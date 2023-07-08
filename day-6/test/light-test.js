@@ -1,15 +1,14 @@
 const { describe, it } = require('node:test');
-const { strictEqual } = require('assert');
+const assert = require('assert');
 const { Light } = require('../src/light');
 
 describe('Light', () => {
   describe('getBrightness', () => {
     it('should return 0 as it is the initial brightness of the light', () => {
       const bulb = new Light();
-      const actual = bulb.getBrightness();
-      const expected = 0;
+      const brightness = bulb.getBrightness();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(brightness, 0);
     });
 
     it('should be in unlit state after creation', () => {
@@ -17,7 +16,7 @@ describe('Light', () => {
       const actual = bulb.isLit();
       const expected = false;
 
-      strictEqual(actual, expected);
+      assert.strictEqual(actual, expected);
     });
   });
 
@@ -26,19 +25,17 @@ describe('Light', () => {
     it('should lit up the light', () => {
       const bulb = new Light();
       bulb.lit();
-      const actual = bulb.isLit();
-      const expected = true;
+      const isLit = bulb.isLit();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(isLit, true);
     });
 
     it('should increase the brightness of the light by 1', () => {
       const bulb = new Light();
       bulb.lit();
-      const actual = bulb.getBrightness();
-      const expected = 1;
+      const brightness = bulb.getBrightness();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(brightness, 1);
     });
   });
 
@@ -47,10 +44,9 @@ describe('Light', () => {
       const bulb = new Light();
       bulb.lit();
       bulb.unlit();
-      const actual = bulb.isLit();
-      const expected = false;
+      const isLit = bulb.isLit();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(isLit, false);
     });
 
     it('should decrease the brightness of the light by 1', () => {
@@ -59,19 +55,17 @@ describe('Light', () => {
       bulb.lit();
       bulb.lit();
       bulb.unlit();
-      const actual = bulb.getBrightness();
-      const expected = 2;
+      const brightness = bulb.getBrightness();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(brightness, 2);
     });
 
     it('should not decrease the brightness below 0', () => {
       const bulb = new Light();
       bulb.unlit();
-      const actual = bulb.getBrightness();
-      const expected = 0;
+      const brightness = bulb.getBrightness();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(brightness, 0);
     });
   });
 
@@ -81,10 +75,9 @@ describe('Light', () => {
       bulb.unlit();
       bulb.toggle();
 
-      const actual = bulb.isLit();
-      const expected = true;
+      const isLit = bulb.isLit();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(isLit, true);
     });
 
     it('should unlit the light when it is in lit state', () => {
@@ -95,16 +88,15 @@ describe('Light', () => {
       const actual = bulb.isLit();
       const expected = false;
 
-      strictEqual(actual, expected);
+      assert.strictEqual(actual, expected);
     });
 
     it('should increase the brightness of the light by 2', () => {
       const bulb = new Light();
       bulb.toggle();
-      const actual = bulb.getBrightness();
-      const expected = 2;
+      const brightness = bulb.getBrightness();
 
-      strictEqual(actual, expected);
+      assert.strictEqual(brightness, 2);
     });
   });
 });

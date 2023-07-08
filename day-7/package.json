@@ -1,0 +1,14 @@
+{
+  "name": "electronic-circuit",
+  "version": "1.0.0",
+  "description": "This year, Santa brought little Bobby Tables a set of wires and bitwise logic gates! Unfortunately, little Bobby is a little under the recommended age range, and he needs help assembling the circuit.",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "rajkumar",
+  "license": "ISC"
+}
