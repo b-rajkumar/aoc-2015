@@ -27,7 +27,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10 });
     });
 
-    it('should perfORm "AND" operation between two input wires AND ASSIGN the output to a wire', () => {
+    it('should perform "AND" operation between two input wires and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -54,7 +54,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10, b: 2, c: 2 });
     });
 
-    it('should perfORm "AND" operation between a input wire AND a number AND ASSIGN the output to a wire', () => {
+    it('should perform "AND" operation between a input wire AND a number and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -74,7 +74,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10, b: 2 });
     });
 
-    it('should perfORm "AND" operation between two numbers AND ASSIGN the output to a wire', () => {
+    it('should perform "AND" operation between two numbers and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       const instructions = {
         operation: 'AND',
@@ -88,7 +88,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { b: 1 });
     });
 
-    it('should perfORm "OR" operation between two input wires AND ASSIGN the output to a wire', () => {
+    it('should perform "OR" operation between two input wires and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -115,7 +115,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10, b: 2, c: 10 });
     });
 
-    it('should perfORm "OR" operation between a input wire AND a number AND ASSIGN the output to a wire', () => {
+    it('should perform "OR" operation between a input wire AND a number and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -135,7 +135,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10, b: 11 });
     });
 
-    it('should perfORm "OR" operation between two numbers AND ASSIGN the output to a wire', () => {
+    it('should perform "OR" operation between two numbers and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       const instruction = {
         operation: 'OR',
@@ -149,7 +149,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { b: 7 });
     });
 
-    it('should perfORm "NOT" operation on a input wire signal AND ASSIGN the output to the output wire', () => {
+    it('should perform "NOT" operation on a input wire signal and assign the output to the output wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -170,7 +170,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 1, b: 65534 });
     });
 
-    it('should perfORm "NOT" operation on a number AND ASSIGN the output to the output wire', () => {
+    it('should perform "NOT" operation on a number and assign the output to the output wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'NOT',
@@ -184,7 +184,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { b: 65530 });
     });
 
-    it('should perfORm "LSHIFT" operation on a input wire signal AND ASSIGN the output to the output wire', () => {
+    it('should perform "LSHIFT" operation on a input wire signal and assign the output to the output wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -205,7 +205,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 7, b: 14 });
     });
 
-    it('should perfORm "RSHIFT" operation on a input wire signal AND ASSIGN the output to the output wire', () => {
+    it('should perform "RSHIFT" operation on a input wire signal and assign the output to the output wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -228,7 +228,7 @@ describe('electronicCircuit', () => {
   });
 
   describe('makeCircuit', () => {
-    it('should return false if the given does NOT make up the circuit', () => {
+    it('should return false if the given does not make up the circuit', () => {
       const electronicCircuit = new ElectronicCircuit();
       const components = [
         {
@@ -253,7 +253,7 @@ describe('electronicCircuit', () => {
       assert.strictEqual(isCircuitMade, false);
     });
 
-    it('should add the components to the circuit AND return true', () => {
+    it('should add component to the circuit when all the required wires are present', () => {
       const electronicCircuit = new ElectronicCircuit();
       const components = [
         {
@@ -278,6 +278,36 @@ describe('electronicCircuit', () => {
 
       const wires = electronicCircuit.getWires();
       assert.deepStrictEqual(wires, { 'ba': 10, 'cy': 1, 'gp': 0 })
+    });
+  });
+
+  describe("reset", () => {
+    it("should reset the electronic circuit by removing all the wires", () => {
+      const electronicCircuit = new ElectronicCircuit();
+      const components = [
+        {
+          operation: "ASSIGN",
+          input: [10],
+          output: 'ba'
+        },
+        {
+          operation: "ASSIGN",
+          input: [1],
+          output: 'cy'
+        },
+        {
+          operation: "AND",
+          input: ['ba', 'cy'],
+          output: 'gp'
+        }
+      ];
+
+      const isCircuitMade = makeCircuit(components, electronicCircuit);
+      assert.strictEqual(isCircuitMade, true);
+      electronicCircuit.reset();
+
+      const wires = electronicCircuit.getWires();
+      assert.deepStrictEqual(wires, {})
     });
   });
 });

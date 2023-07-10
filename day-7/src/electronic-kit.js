@@ -8,59 +8,59 @@ class ElectronicCircuit {
     return typeof value === 'number';
   }
 
-  #assign({ input, wire }) {
-    this.#wires[wire] = input[0];
+  #identity([number]) {
+    return number;
   }
 
-  #and({ input, wire }) {
-    const [signal1, signal2] = input;
-    this.#wires[wire] = signal1 & signal2;
+  #and([number1, number2]) {
+    return number1 & number2;
   }
 
-  #or({ input, wire }) {
-    const [signal1, signal2] = input;
-    this.#wires[wire] = signal1 | signal2;
+  #or([number1, number2]) {
+    return number1 | number2;
   }
 
-  #not({ input, wire }) {
-    const inputNumber = input[0];
-    this.#wires[wire] = 65535 - inputNumber;
+  #not([number]) {
+    return 65535 - number;
   }
 
-  #lshift({ input, wire }) {
-    const [inputNumber, shiftCount] = input;
-    this.#wires[wire] = inputNumber << shiftCount;
+  #lshift([number, shiftCount]) {
+    return number << shiftCount;
   }
 
-  #rshift({ input, wire }) {
-    const [inputNumber, shiftCount] = input;
-    this.#wires[wire] = inputNumber >> shiftCount;
+  #rshift([number, shiftCount]) {
+    return number >> shiftCount;
   }
 
   #extractIO(instruction) {
-    const input = instruction.input.map(input => this.#isNumber(input) ? input : this.#wires[input]);
+    const inputs = instruction.input.map(signal =>
+      this.#isNumber(signal) ? signal : this.#wires[signal]);
     const wire = instruction.output;
 
-    return { input, wire };
+    return { inputs, wire };
   }
 
   execute(instruction) {
     const gates = {
-      'ASSIGN': (instruction) => this.#assign(instruction),
-      'AND': (instruction) => this.#and(instruction),
-      'OR': (instruction) => this.#or(instruction),
-      'NOT': (instruction) => this.#not(instruction),
-      'LSHIFT': (instruction) => this.#lshift(instruction),
-      'RSHIFT': (instruction) => this.#rshift(instruction),
+      'ASSIGN': (inputs) => this.#identity(inputs),
+      'AND': (inputs) => this.#and(inputs),
+      'OR': (inputs) => this.#or(inputs),
+      'NOT': (inputs) => this.#not(inputs),
+      'LSHIFT': (inputs) => this.#lshift(inputs),
+      'RSHIFT': (inputs) => this.#rshift(inputs),
     };
 
     const operation = gates[instruction.operation];
-    const { input, wire } = this.#extractIO(instruction);
+    const { inputs, wire } = this.#extractIO(instruction);
 
-    if(input.includes(undefined)) return false;
-    operation({ input, wire });
+    if(inputs.includes(undefined)) return false;
+    this.#wires[wire] = operation(inputs);
 
     return true;
+  }
+
+  reset() {
+    this.#wires = {};
   }
 
   getWires() {

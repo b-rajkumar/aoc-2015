@@ -19,4 +19,4 @@ const getVisitedHousesCount = (instructions) => {
   return visitedHouses.size;
 };
 
-exports.getVisitedHousesCount = getVisitedHousesCount;  
+exports.getVisitedHousesCount = getVisitedHousesCount;

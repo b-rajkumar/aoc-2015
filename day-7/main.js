@@ -7,14 +7,31 @@ const readLines = () => {
   return fs.readFileSync(instructionsFile, 'utf-8').split('\n');
 };
 
+const modifyInputSignal = (wire, input, components) => {
+  components.forEach(component => {
+    if(component.output === wire) {
+      component.input = input;
+    }
+  });
+};
 
 const main = () => {
   const rawInstructions = readLines();
-  const components = extractInstruction(rawInstructions);
+  let components = extractInstruction(rawInstructions);
   const electronicCircuit = new ElectronicCircuit();
 
   makeCircuit(components, electronicCircuit);
-  console.log(electronicCircuit.getWires().a);
+  let wires = electronicCircuit.getWires();
+  let aWireSignal = wires.a;
+  console.log('The signal provided to wire "a" is', aWireSignal);
+  electronicCircuit.reset();
+
+  modifyInputSignal('b', [aWireSignal], components);
+  makeCircuit(components, electronicCircuit);
+  wires = electronicCircuit.getWires();
+  aWireSignal = wires.a;
+  console.log('The signal of "a" wire after assigning the signal of "a" to "b" from previous operations is', aWireSignal);
+
 };
 
 main();

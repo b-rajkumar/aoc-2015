@@ -51,7 +51,7 @@ describe('extractInstruction', () => {
     assert.deepStrictEqual(extractedInstruction, expectedInstruction);
   });
 
-  it('should extract multiple instructions from the raw instruction', () => {
+  it('should extract multiple instructions from the raw instructions', () => {
     const rawInstruction = ['at OR az -> ba', '1 AND cx -> cy', 'NOT go -> gp'];
     const expectedInstruction = [{
       operation: "OR",
