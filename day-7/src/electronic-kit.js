@@ -59,10 +59,6 @@ class ElectronicCircuit {
     return true;
   }
 
-  reset() {
-    this.#wires = {};
-  }
-
   getWires() {
     return { ...this.#wires };
   }

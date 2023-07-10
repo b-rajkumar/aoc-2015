@@ -280,34 +280,4 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { 'ba': 10, 'cy': 1, 'gp': 0 })
     });
   });
-
-  describe("reset", () => {
-    it("should reset the electronic circuit by removing all the wires", () => {
-      const electronicCircuit = new ElectronicCircuit();
-      const components = [
-        {
-          operation: "ASSIGN",
-          input: [10],
-          output: 'ba'
-        },
-        {
-          operation: "ASSIGN",
-          input: [1],
-          output: 'cy'
-        },
-        {
-          operation: "AND",
-          input: ['ba', 'cy'],
-          output: 'gp'
-        }
-      ];
-
-      const isCircuitMade = makeCircuit(components, electronicCircuit);
-      assert.strictEqual(isCircuitMade, true);
-      electronicCircuit.reset();
-
-      const wires = electronicCircuit.getWires();
-      assert.deepStrictEqual(wires, {})
-    });
-  });
 });

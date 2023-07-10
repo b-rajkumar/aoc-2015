@@ -17,21 +17,19 @@ const modifyInputSignal = (wire, input, components) => {
 
 const main = () => {
   const rawInstructions = readLines();
-  let components = extractInstruction(rawInstructions);
+  const components = extractInstruction(rawInstructions);
   const electronicCircuit = new ElectronicCircuit();
+  const secondElectronicCircuit = new ElectronicCircuit();
 
   makeCircuit(components, electronicCircuit);
   let wires = electronicCircuit.getWires();
-  let aWireSignal = wires.a;
-  console.log('The signal provided to wire "a" is', aWireSignal);
-  electronicCircuit.reset();
+  console.log('The signal provided to wire "a" is', wires.a);
 
-  modifyInputSignal('b', [aWireSignal], components);
-  makeCircuit(components, electronicCircuit);
-  wires = electronicCircuit.getWires();
-  aWireSignal = wires.a;
-  console.log('The signal of "a" wire after assigning the signal of "a" to "b" from previous operations is', aWireSignal);
+  modifyInputSignal('b', [wires.a], components);
 
+  makeCircuit(components, secondElectronicCircuit);
+  wires = secondElectronicCircuit.getWires();
+  console.log('The signal of "a" wire after assigning the signal of "a" to "b" from previous operxations is', wires.a);
 };
 
 main();
