@@ -13,7 +13,7 @@ describe('electronicCircuit', () => {
   });
 
   describe('execute', () => {
-    it('should ASSIGN a signal value to a wire AND add it to the wires', () => {
+    it('should ASSIGN a signal value to a wire and add it to the wires', () => {
       const electronicCircuit = new ElectronicCircuit();
       const instructions = {
         operation: 'ASSIGN',
@@ -54,7 +54,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10, b: 2, c: 2 });
     });
 
-    it('should perform "AND" operation between a input wire AND a number and assign the output to a wire', () => {
+    it('should perform "AND" operation between a input wire and a number and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',
@@ -115,7 +115,7 @@ describe('electronicCircuit', () => {
       assert.deepStrictEqual(wires, { a: 10, b: 2, c: 10 });
     });
 
-    it('should perform "OR" operation between a input wire AND a number and assign the output to a wire', () => {
+    it('should perform "OR" operation between a input wire and a number and assign the output to a wire', () => {
       const electronicCircuit = new ElectronicCircuit();
       let instruction = {
         operation: 'ASSIGN',

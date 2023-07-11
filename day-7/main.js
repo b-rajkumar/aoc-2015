@@ -9,9 +9,7 @@ const readLines = () => {
 
 const modifyInputSignal = (wire, input, components) => {
   components.forEach(component => {
-    if(component.output === wire) {
-      component.input = input;
-    }
+    if(component.output === wire) component.input = input;
   });
 };
 
